@@ -5,7 +5,7 @@ from Levenshtein import distance
 
 
 def get_audio_transcription_words():
-	with open('data/audio.transcription.clean.txt') as f:
+	with open('data/audio-transcription.clean.txt') as f:
 		data = f.read()
 	return data.split(' ')
 
@@ -25,6 +25,7 @@ def get_book_transcription_words():
 
 def next_sentence_match(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 	print('next sentence match')
+
 	for a in range(10):
 		future_idx_a = idx_a + a + 1
 		future_a_1 = words_a[future_idx_a]
