@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 import json
 import spacy
 
@@ -11,6 +13,7 @@ nlp = spacy.load('en_core_web_lg')
 nlp.max_length = 2000 * 1000
 doc = nlp(text)
 sents = []
+
 for sent in doc.sents:
 	sent = sent.text
 	sent = sent.strip().lower().replace('’', '\'')
