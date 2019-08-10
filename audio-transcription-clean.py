@@ -2,7 +2,7 @@ import json
 import spacy
 
 
-with open('data/audio.transcription.flat.txt') as f:
+with open('data/audio-transcription.flat.txt') as f:
 	data = f.read()
 data = data.lower().replace('’', '\'')
 
@@ -20,5 +20,5 @@ for line in data.split('\n'):
 
 print(len(words))
 words = ' '.join(words)
-with open('data/audio.transcription.clean.txt', 'w') as f:
+with open('data/audio-transcription.clean.txt', 'w') as f:
 	f.write(words)
