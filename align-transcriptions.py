@@ -95,16 +95,17 @@ def match_window(book_next_sent_words, words, idx):
 
 
 def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
-	print('skip sentence')
-	print('book next sentence:', ' '.join(book_next_sent_words))
+	print('> skip sentence')
+	print('book next sentence:', '\n', ' '.join(book_next_sent_words))
 
 	future_idx_a = match_window(book_next_sent_words, words_a, idx_a)
 	future_idx_b = match_window(book_next_sent_words, words_b, idx_b)
 
 	if future_idx_a and future_idx_b:
-		print('a<>b - matched!')
+		print('matched A <> B!')
 		return True, future_idx_a, future_idx_b
 	elif future_idx_b:
+		print('matched B!')
 		return True, None, future_idx_b
 	else:
 		raise Exception
@@ -128,14 +129,14 @@ while True:
 	book_sent = ' '.join(book_sent_words)
 	book_sent_end_idx = book_sent_start_idx + len(book_sent_words)
 
-	print('\n')
-	print('+', book_sent)
-	print('audio index:      ', audio_idx, '/', len(audio_words))
-	print('sentences matched:', book_sent_matched, '/', len(book_sents_words))
-	print('sentence number:  ', book_sent_idx, '-sentence start index:', book_sent_start_idx)
-	print('sentence start:   ', book_idx, '-end:', book_sent_end_idx)
-	print('audio:', audio_w, '>>', audio_words[audio_idx + 1], audio_words[audio_idx + 2])
-	print('book: ', book_w, '>>', book_words[book_idx + 1], book_words[book_idx + 2])
+	print('\n---------------------------------------------------')
+	print('first sent found:   ', first_sentence_found)
+	print('audio:              ', audio_idx, '/', len(audio_words))
+	print('book:               ', book_idx, '/', len(book_words))
+	print('audio words:        ', audio_w, '|', audio_words[audio_idx + 1], audio_words[audio_idx + 2])
+	print('book words:         ', book_w, '|', book_words[book_idx + 1], book_words[book_idx + 2])
+	print('sentences processed:', book_sent_idx, '/', len(book_sents_words))
+	print('sentences matched:  ', book_sent_matched)
 
 	next_word_match_result = next_word_match(book_sent_end_idx,
 											 audio_words,
@@ -166,12 +167,12 @@ while True:
 		print('<next sentence match>')
 		future_idx_a = next_sentence_match_result[1]
 		future_idx_b = next_sentence_match_result[2]
-
 	else:
-		print('<skip sentence>')
+		print('> first sent found:', first_sentence_found)
 		book_sent_idx += 1
 		book_sent_words = book_sents_words[book_sent_idx]
 		book_sent = ' '.join(book_sent_words)
+		
 		skip_sentence_result = skip_sentence(book_sent_words, audio_words, audio_idx, book_words, book_idx)
 		audio_idx += 1
 
@@ -184,21 +185,23 @@ while True:
 				future_idx_a = tmp_idx_a
 
 	if future_idx_a and future_idx_b:
-		print('-------------------------------------------------------')
+		print('\nbook  -current:', book_idx,  '-future:', future_idx_b)
 		print('audio -current:', audio_idx, '-future:', future_idx_a)
 		print('book  -current:', book_idx,  '-future:', future_idx_b)
-		print('-------------------------------------------------------')
 		audio_idx = future_idx_a
 		book_idx = future_idx_b
 
 	tmp_words = book_words[book_sent_start_idx:book_idx]
 	tmp_sent = ' '.join(tmp_words)
-	print('=', book_sent)
-	print('=', tmp_sent)
+	print('')
+	print('  ', book_sent)
+	print('>>', tmp_sent)
 
 	if book_sent == tmp_sent:
-		print('new sentence found!')
+		print('\n++++++++++++++++++++++++++++++++')
+		print('new sentence matched!')
 		book_sent_idx += 1
 		book_sent_matched += 1
 		book_sent_start_idx = book_idx
-		print('new sentence start index:', book_sent_start_idx)
+		print('next sentence start:', book_sent_start_idx)
+		print('++++++++++++++++++++++++++++++++')
