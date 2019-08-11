@@ -27,7 +27,7 @@ def next_sentence_match(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 	print('next sentence match')
 
 	for a in range(10):
-		future_idx_a = idx_a + a + 1
+		future_idx_a = idx_a + a
 		future_a_1 = words_a[future_idx_a]
 		future_a_2 = words_a[future_idx_a + 1]
 
@@ -41,7 +41,7 @@ def next_sentence_match(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 		print('searching in "b"...')
 
 		for b in range(10):
-			future_idx_b = idx_b + b + 1
+			future_idx_b = idx_b + b
 			future_b_1 = words_b[future_idx_b]
 			future_b_2 = words_b[future_idx_b + 1]
 
