@@ -2,7 +2,7 @@ import json
 import spacy
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	with open('data/book-transcription.txt', 'r') as f:
 		text = f.read()
 	lines = text.split('\n')

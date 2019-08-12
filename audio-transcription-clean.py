@@ -2,7 +2,7 @@ import json
 import spacy
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	nlp = spacy.load('en_core_web_lg')
 	input_file = open('data/audio-transcription.flat.txt')
 	output_file = open('data/audio-transcription.clean.txt', 'w')
