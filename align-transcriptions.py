@@ -99,7 +99,7 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 
 
 if __name__ == '__main__':
-	output_file = open('data/audio-chunks.json.txt', 'w')
+	output_file = open('data/audio-sentences.json.txt', 'w')
 
 	audio_words, audio_objs = get_audio_transcription_words()
 	assert len(audio_words) == len(audio_objs)
