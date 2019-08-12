@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt-get update -y
 
+RUN apt-get install -y ffmpeg
 RUN apt-get install -y jq
 RUN apt-get install -y python3.5
 RUN apt-get install -y python3-pip
