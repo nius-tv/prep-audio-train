@@ -70,6 +70,17 @@ def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 	return False, None, None
 
 
+def save_audio_chunks(audio_start, audio_end, book_start_idx, book_end_idx):
+	data = {
+		'audio_start': audio_start,
+		'audio_end': audio_end,
+		'book_start_idx': book_start_idx,
+		'book_end_idx': book_end_idx
+	}
+	data = json.dumps(data)
+	output_file.write(data + '\n')
+
+
 def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 	print('> skip sentence')
 	print('book next sentence:', '\n', ' '.join(book_next_sent_words))
@@ -88,6 +99,8 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 
 
 if __name__ == "__main__":
+	output_file = open('data/audio-chunks.json.txt', 'w')
+
 	audio_words, audio_objs = get_audio_transcription_words()
 	assert len(audio_words) == len(audio_objs)
 	book_words, book_sents_words = get_book_transcription_words()
@@ -171,7 +184,11 @@ if __name__ == "__main__":
 			audio_start = audio_objs[audio_sent_start_idx]['start']
 			audio_end = audio_objs[audio_idx - 1]['end']
 			print('audio -start:', audio_start , '-end:', audio_end)
-			print('audio words:\n', ' '.join(audio_words[audio_sent_start_idx:audio_idx]))
+			audio_sent = ' '.join(audio_words[audio_sent_start_idx:audio_idx])
+			print('audio words:\n', audio_sent)
+
+			save_audio_chunks(audio_start, audio_end, book_sent_start_idx, book_idx)
+
 			audio_sent_start_idx = audio_idx
 			book_sent_idx += 1
 			book_sents_matched += 1
