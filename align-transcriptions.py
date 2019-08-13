@@ -182,7 +182,7 @@ if __name__ == '__main__':
 			print('\n++++++++++++++++++++++++++++++++')
 			print('new sentence matched!')
 			audio_start = audio_objs[audio_sent_start_idx]['start']
-			audio_end = audio_objs[audio_idx - 1]['end']
+			audio_end = audio_objs[audio_idx]['end']
 			print('audio -start:', audio_start , '-end:', audio_end)
 			audio_sent = ' '.join(audio_words[audio_sent_start_idx:audio_idx])
 			print('audio words:\n', audio_sent)
