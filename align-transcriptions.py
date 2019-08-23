@@ -6,7 +6,7 @@ from Levenshtein import distance
 def get_audio_transcription_words():
 	with open('data/audio-transcription.clean.txt') as f:
 		lines = f.readlines()
-	
+
 	texts, words = [], []
 	for line in lines:
 		word = json.loads(line)
@@ -51,10 +51,10 @@ def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 		future_b_2 = words_b[future_idx_b + 1]
 
 		print('\nb -current:', idx_b, '-future:', future_idx_b, '-words:', future_b_1, future_b_2)
-		
+
 		for a in range(10):
 			future_idx_a = idx_a + a
-	
+
 			if len(words_a) == future_idx_a + 1:
 				return False, None, None
 
@@ -94,7 +94,7 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 	elif future_idx_b:
 		print('matched B!')
 		return True, None, future_idx_b
-	
+
 	return False, None, None
 
 
@@ -153,7 +153,7 @@ if __name__ == '__main__':
 			book_sent_idx += 1
 			book_sent_words = book_sents_words[book_sent_idx]
 			book_sent = ' '.join(book_sent_words)
-			
+	
 			skip_sentence_result = skip_sentence(book_sent_words, audio_words, audio_idx, book_words, book_idx)
 
 			if skip_sentence_result[0]:
