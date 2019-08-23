@@ -1,6 +1,8 @@
 import json
 import spacy
 
+from utils import clean_token
+
 
 if __name__ == '__main__':
 	nlp = spacy.load('en_core_web_lg')
@@ -12,13 +14,9 @@ if __name__ == '__main__':
 		word = json.loads(word)
 		text = word['word']
 		for token in nlp(text):
-			if token.pos_ in ['PUNCT', 'SPACE'] \
-				or not token.is_alpha:
+			text = clean_token(token)
+			if text is None:
 				continue
-			if token.pos_ in ['PROPN']:
-				text = '--TOKEN--'
-			else:
-				text = token.lemma_.lower()
 			tmp_word = {
 				'text': text,
 				'start': word['startTime'],

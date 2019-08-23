@@ -1,11 +1,12 @@
 import json
 import spacy
 
+from utils import clean_token
+
 
 if __name__ == '__main__':
 	with open('data/book-transcription.txt', 'r') as f:
-		text = f.read()
-	lines = text.split('\n')
+		lines = f.readlines()
 	text = ' '.join(lines)
 
 	nlp = spacy.load('en_core_web_lg')
@@ -29,13 +30,9 @@ if __name__ == '__main__':
 	for sent in sents:
 		sent_words = []
 		for token in nlp(sent):
-			if token.pos_ in ['PUNCT', 'SPACE'] \
-				or not token.is_alpha:
+			text = clean_token(token)
+			if text is None:
 				continue
-			if token.pos_ in ['PROPN']:
-				text = '--TOKEN--'
-			else:
-				text = token.lemma_.lower()
 			sent_words.append(text)
 		line = json.dumps(sent_words)
 		output_file.write(line + '\n')
