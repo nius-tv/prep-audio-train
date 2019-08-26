@@ -6,7 +6,7 @@ from utils import segment_audio
 
 if __name__ == '__main__':
     start_offset = 0.3
-    end_offset = 0.8
+    end_offset = -0.8
     duration = 60
     input_audio = '/data/original.wav'
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
             continue
 
         start = float(sent['audio_start']) + start_offset
-        end = float(sent['audio_end']) - end_offset
+        end = float(sent['audio_end']) + end_offset
 
         assert end - start < duration
 
