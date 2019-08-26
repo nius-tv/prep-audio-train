@@ -11,8 +11,8 @@ if __name__ == '__main__':
     ]
     output_file = open('data/audio-transcription.flat.txt', 'w')
 
-    for i, filename in enumerate(files):
-        with open(filename) as f:
+    for i, file_path in enumerate(files):
+        with open(file_path) as f:
             data = f.read()
         data = json.loads(data)
 
