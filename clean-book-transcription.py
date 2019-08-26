@@ -6,8 +6,7 @@ from utils import clean_token
 
 if __name__ == '__main__':
 	with open('data/book-transcription.txt', 'r') as f:
-		lines = f.readlines()
-	text = ' '.join(lines)
+		text = f.read()
 
 	nlp = spacy.load('en_core_web_lg')
 	nlp.max_length = 2000 * 1000
