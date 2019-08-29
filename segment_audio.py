@@ -1,14 +1,13 @@
 import json
 import os
 
+from config import duration, original_audio
 from utils import segment_audio
 
 
 if __name__ == '__main__':
     start_offset = 0.3
     end_offset = -0.8
-    duration = 60
-    input_audio = '/data/original.wav'
 
     with open('/data/audio-sentences.json.txt') as f:
         sents = f.readlines()
@@ -28,4 +27,4 @@ if __name__ == '__main__':
 
         start = '{0:.2f}'.format(start)
         end = '{0:.2f}'.format(end)
-        segment_audio(input_audio, output_audio, start, end)
+        segment_audio(original_audio, output_audio, start, end)

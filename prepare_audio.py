@@ -1,14 +1,12 @@
 import audioread
 import math
 
+from config import max_seconds, original_audio
 from utils import segment_audio
 
 
 if __name__ == '__main__':
-    file_path = '/data/original.wav'
-    max_seconds = 5 * 60 * 60 # 5 hours
-
-    with audioread.audio_open(file_path) as f:
+    with audioread.audio_open(original_audio) as f:
         duration = f.duration
     print('duration:', duration)
 
@@ -19,4 +17,4 @@ if __name__ == '__main__':
         start = i * max_seconds
         end = (i + 1) * max_seconds
         output_audio = '/data/parts/{}-{}.wav'.format(start, end)
-        segment_audio(file_path, output_audio, start, end)
+        segment_audio(original_audio, output_audio, start, end)
