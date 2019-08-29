@@ -7,6 +7,7 @@ RUN apt-get install -y python3.5
 RUN apt-get install -y python3-pip
 RUN apt-get install -y sox
 
+RUN pip3 install audioread==2.1.8
 RUN pip3 install google-cloud-speech==1.2.0
 RUN pip3 install python-levenshtein==0.12.0
 RUN pip3 install spacy==2.1.7
