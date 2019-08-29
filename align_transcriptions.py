@@ -41,7 +41,7 @@ def match_window(book_next_sent_words, words, idx):
 	
 def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 	print('> next word match')
-	for b in range(10):
+	for b in range(max_next_word):
 		future_idx_b = idx_b + b
 
 		if future_idx_b > book_sent_end_idx:
@@ -52,7 +52,7 @@ def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 
 		print('\nb -current:', idx_b, '-future:', future_idx_b, '-words:', future_b_1, future_b_2)
 
-		for a in range(10):
+		for a in range(max_next_word):
 			future_idx_a = idx_a + a
 
 			if len(words_a) == future_idx_a + 1:
@@ -99,6 +99,7 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 
 
 if __name__ == '__main__':
+	max_next_word = 10
 	output_file = open('/data/audio-sentences.json.txt', 'w')
 
 	audio_words, audio_objs = get_audio_transcription_words()
