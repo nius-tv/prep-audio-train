@@ -5,7 +5,7 @@ from utils import clean_token
 
 
 if __name__ == '__main__':
-	with open('data/book-transcription.txt', 'r') as f:
+	with open('/data/book-transcription.txt', 'r') as f:
 		text = f.read()
 
 	nlp = spacy.load('en_core_web_lg')
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
 	print('sentences:', len(sents))
 
-	output_file = open('data/book-transcription.clean.json.txt', 'w')
+	output_file = open('/data/book-transcription.clean.json.txt', 'w')
 
 	for sent in sents:
 		sent_words = []

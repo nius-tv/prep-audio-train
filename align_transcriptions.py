@@ -4,7 +4,7 @@ from Levenshtein import distance
 
 
 def get_audio_transcription_words():
-	with open('data/audio-transcription.clean.txt') as f:
+	with open('/data/audio-transcription.clean.txt') as f:
 		lines = f.readlines()
 
 	texts, words = [], []
@@ -17,7 +17,7 @@ def get_audio_transcription_words():
 
 
 def get_book_transcription_words():
-	with open('data/book-transcription.clean.json.txt') as f:
+	with open('/data/book-transcription.clean.json.txt') as f:
 		lines = f.readlines()
 
 	all_words, sents_words = [], []
@@ -99,7 +99,7 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 
 
 if __name__ == '__main__':
-	output_file = open('data/audio-sentences.json.txt', 'w')
+	output_file = open('/data/audio-sentences.json.txt', 'w')
 
 	audio_words, audio_objs = get_audio_transcription_words()
 	assert len(audio_words) == len(audio_objs)
