@@ -1,7 +1,7 @@
 import glob
 import json
 
-from config import max_seconds
+from config import part_duration
 
 
 if __name__ == '__main__':
@@ -18,11 +18,11 @@ if __name__ == '__main__':
         for result in data['response']['results']:
             for word in result['alternatives'][0]['words']:
                 start = word['startTime'][0:-1]
-                start = float(start) + (i * max_seconds)
+                start = float(start) + (i * part_duration)
                 word['startTime'] = start
 
                 end = word['endTime'][0:-1]
-                end = float(end) + (i * max_seconds)
+                end = float(end) + (i * part_duration)
                 word['endTime'] = end
 
                 line = json.dumps(word)

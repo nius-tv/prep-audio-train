@@ -1,7 +1,7 @@
 import json
 import os
 
-from config import duration, original_audio
+from config import original_audio, segment_duration
 from utils import segment_audio
 
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         start = float(sent['audio_start']) + start_offset
         end = float(sent['audio_end']) + end_offset
 
-        assert end - start < duration
+        assert end - start < segment_duration
 
         start = '{0:.2f}'.format(start)
         end = '{0:.2f}'.format(end)
