@@ -6,6 +6,8 @@ from utils import segment_audio
 
 
 if __name__ == '__main__':
+    # Speech-to-text audio timestamps are not perfect.
+    # Here we define offsets (heuristics) to "compensate" for the loss of precision.
     start_offset = 0.3
     end_offset = -0.8
 
@@ -25,6 +27,4 @@ if __name__ == '__main__':
 
         assert end - start < segment_duration
 
-        start = '{0:.2f}'.format(start)
-        end = '{0:.2f}'.format(end)
         segment_audio(original_audio, output_audio, start, end)

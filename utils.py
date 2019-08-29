@@ -2,6 +2,9 @@ import subprocess
 
 
 def clean_token(token):
+    '''
+    Removes noisy tokens, normalizes text, and reduces text.
+    '''
     if token.pos_ in ['PUNCT', 'SPACE'] \
         or not token.is_alpha:
         return None

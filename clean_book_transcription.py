@@ -9,10 +9,13 @@ if __name__ == '__main__':
 		text = f.read()
 
 	nlp = spacy.load('en_core_web_lg')
-	nlp.max_length = 2000 * 1000
+	# For large texts, such as books, we need to increase the default value.
+	nlp.max_length = 2000 * 1000 # magic number
 	doc = nlp(text)
 	sents = []
 
+	# Extract only sentences that end with a period, exclamation mark,
+	# and interrogation mark.
 	for sent in doc.sents:
 		sent = sent.text
 		sent = sent.strip().replace('’', '\'')
@@ -26,6 +29,7 @@ if __name__ == '__main__':
 
 	output_file = open('/data/book-transcription.clean.json.txt', 'w')
 
+	# Clean tokens: remove noisy tokens, normalize text.
 	for sent in sents:
 		sent_words = []
 		for token in nlp(sent):

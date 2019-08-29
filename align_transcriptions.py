@@ -30,6 +30,10 @@ def get_book_transcription_words():
 
 
 def match_window(book_next_sent_words, words, idx):
+	'''
+	Scans the book's words list using a moving window 
+	in search of the words of the next sentence.
+	'''
 	ini_idx = idx
 	while ini_idx < len(words):
 		end_idx = ini_idx + len(book_next_sent_words)
@@ -40,6 +44,9 @@ def match_window(book_next_sent_words, words, idx):
 
 	
 def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
+	'''
+	Scans book and audio words for a consecutive two words match.
+	'''
 	print('> next word match')
 	for b in range(max_next_word):
 		future_idx_b = idx_b + b
@@ -136,6 +143,7 @@ if __name__ == '__main__':
 												 book_words,
 												 book_idx)
 
+		# Exact and almost match
 		if first_sentence_found and edit_dist <= 1:
 			future_idx_a = audio_idx + 1
 			future_idx_b = book_idx + 1
@@ -145,10 +153,12 @@ if __name__ == '__main__':
 			else:
 				print('> distance:', audio_w, book_w)
 
+		# Find two consecutive words
 		elif first_sentence_found and next_word_match_result[0]:
 			future_idx_a = next_word_match_result[1]
 			future_idx_b = next_word_match_result[2]
 
+		# Skip sentence
 		else:
 			print('> first sent found:', first_sentence_found)
 			book_sent_idx += 1

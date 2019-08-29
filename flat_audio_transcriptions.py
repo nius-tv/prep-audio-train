@@ -5,6 +5,7 @@ from config import part_duration
 
 
 if __name__ == '__main__':
+    # Sort file names that have the following format: {start}-{end}.wav.
     files = sorted(glob.glob('/data/transcriptions/*'))
     output_file = open('/data/audio-transcription.flat.txt', 'w')
 
