@@ -1,9 +1,10 @@
 import glob
 import json
 
+from config import max_seconds
+
 
 if __name__ == '__main__':
-    max_seconds = 5 * 60 * 60 # 5 hours
     files = sorted(glob.glob('/data/transcriptions/*'))
     output_file = open('/data/audio-transcription.flat.txt', 'w')
 
