@@ -10,7 +10,7 @@ def add_silence(input_audio, output_audio):
 
 
 if __name__ == '__main__':
-    for input_audio in glob.glob('/data/segments/**'):
+    for input_audio in glob.iglob('/data/segments/*'):
         file_name = input_audio.split('/')[-1]
         output_audio = '/data/silence/{}'.format(file_name)
         add_silence(input_audio, output_audio)
