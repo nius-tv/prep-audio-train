@@ -16,7 +16,7 @@ if __name__ == '__main__':
             data = f.read()
         data = json.loads(data)
 
-        for result in data['response']['results']:
+        for result in data['results']:
             # The first alternative is the most likely one for this portion.
             for word in result['alternatives'][0]['words']:
                 start = word['startTime'][0:-1]
