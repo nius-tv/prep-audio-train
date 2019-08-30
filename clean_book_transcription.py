@@ -38,6 +38,8 @@ if __name__ == '__main__':
 				continue
 			sent_words.append(text)
 		line = json.dumps(sent_words)
+		print(line)
+
 		output_file.write(line + '\n')
 
 	output_file.close()

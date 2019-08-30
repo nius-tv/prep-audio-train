@@ -23,6 +23,8 @@ if __name__ == '__main__':
 				'end': word['endTime']
 			}
 			tmp_word = json.dumps(tmp_word)
+			print(tmp_word)
+
 			output_file.write(tmp_word + '\n')
 
 	input_file.close()
