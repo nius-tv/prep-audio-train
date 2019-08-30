@@ -17,6 +17,7 @@ if __name__ == '__main__':
         data = json.loads(data)
 
         for result in data['response']['results']:
+            # The first alternative is the most likely one for this portion.
             for word in result['alternatives'][0]['words']:
                 start = word['startTime'][0:-1]
                 start = float(start) + (i * part_duration)
