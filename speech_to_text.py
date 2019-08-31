@@ -1,15 +1,16 @@
 import glob
 
-from config import sample_rate
+from config import gcs_bucket, sample_rate, voice_name
 from google.cloud import speech
 from google.cloud.speech import types
+from google.protobuf.json_format import MessageToJson
 
 
 def speech_to_text(input_audio, output_transcription):
-    with open(input_audio, 'rb') as f:
-        content = f.read()
-    audio = types.RecognitionAudio(content=content)
+    gcs_uri = 'gs://{}/{}{}'.format(gcs_bucket, voice_name, input_audio)
+    print('processing audio:', gcs_uri)
 
+    audio = types.RecognitionAudio(uri=gcs_uri)
     config = types.RecognitionConfig(
         enable_word_time_offsets=True,
         language_code='en-US',
@@ -20,7 +21,15 @@ def speech_to_text(input_audio, output_transcription):
         use_enhanced=True)
 
     # Converts speech to text
-    response = client.recognize(config, audio)
+    print('Waiting for operation to complete...')
+    operation = client.long_running_recognize(config, audio)
+    response = operation.result()
+    # https://github.com/googleapis/google-cloud-python/issues/3485#issuecomment-307797562
+    response = MessageToJson(response)
+
+    # Save transcription
+    with open(output_transcription, 'w') as f:
+        f.write(response)
 
 
 if __name__ == '__main__':
