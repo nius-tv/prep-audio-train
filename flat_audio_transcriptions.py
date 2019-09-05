@@ -19,11 +19,11 @@ if __name__ == '__main__':
         for result in data['results']:
             # The first alternative is the most likely one for this portion.
             for word in result['alternatives'][0]['words']:
-                start = word['startTime'][0:-1]
+                start = word['startTime'][0:-1] # removes "s" from "startTime"
                 start = float(start) + (i * part_duration)
                 word['startTime'] = start
 
-                end = word['endTime'][0:-1]
+                end = word['endTime'][0:-1] # removes "s" from "endTime"
                 end = float(end) + (i * part_duration)
                 word['endTime'] = end
 
