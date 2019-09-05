@@ -7,7 +7,7 @@ from utils import segment_audio
 
 if __name__ == '__main__':
     # Speech-to-text audio timestamps are not perfect.
-    # Here we define offsets (heuristics) to "compensate" for the loss of precision.
+    # Here we define offsets (heuristics) to compensate for the loss of precision.
     start_offset = 0.3
     end_offset = -0.8
 

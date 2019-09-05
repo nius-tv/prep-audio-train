@@ -17,7 +17,7 @@ def speech_to_text(input_audio, output_transcription):
         sample_rate_hertz=sample_rate,
         # Enhanced models are only available to projects that
         # opt in for audio data collection.
-        # https://cloud.google.com/speech-to-text/docs/enhanced-models
+        # For more information see https://cloud.google.com/speech-to-text/docs/enhanced-models.
         use_enhanced=True)
 
     # Converts speech to text
