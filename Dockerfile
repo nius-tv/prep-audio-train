@@ -15,3 +15,5 @@ RUN pip3 install spacy==2.1.7
 RUN python3 -m spacy download en_core_web_lg
 
 ENV LANG C.UTF-8
+
+ADD . /app
