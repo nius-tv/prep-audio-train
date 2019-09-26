@@ -1,11 +1,13 @@
 import glob
 
-from config import segment_duration
+from config import *
 from utils import segment_audio
 
 
 if __name__ == '__main__':
-    for input_audio in glob.iglob('/data/silence/*'):
+	silence_dir = '{}/*'.format(SILENCE_DIR_PATH)
+
+    for input_audio in glob.iglob(silence_dir):
         file_name = input_audio.split('/')[-1]
-        output_audio = '/data/norm/{}'.format(file_name)
-        segment_audio(input_audio, output_audio, 0, segment_duration)
+        output_audio = '{}/{}'.format(NORMALIZED_DIR_PATH, file_name)
+        segment_audio(input_audio, output_audio, 0, SEGMENT_DURATION)

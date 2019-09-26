@@ -1,13 +1,14 @@
 import json
 import spacy
 
+from config import *
 from utils import clean_token
 
 
 if __name__ == '__main__':
-	nlp = spacy.load('en_core_web_lg')
-	input_file = open('/data/audio-transcription.flat.txt')
-	output_file = open('/data/audio-transcription.clean.txt', 'w')
+	nlp = spacy.load(SPACY_MODEL)
+	input_file = open(TRANSCRIPTION_FLAT_FILE_PATH)
+	output_file = open(TRANSCRIPTION_CLEAN_FILE_PATH, 'w')
 
 	for word in input_file.readlines():
 		word = word.replace('’', '\'')

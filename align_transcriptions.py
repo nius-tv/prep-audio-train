@@ -1,10 +1,11 @@
 import json
 
+from config import *
 from Levenshtein import distance
 
 
 def get_audio_transcription_words():
-	with open('/data/audio-transcription.clean.txt') as f:
+	with open(TRANSCRIPTION_CLEAN_FILE_PATH) as f:
 		lines = f.readlines()
 
 	texts, words = [], []
@@ -17,7 +18,7 @@ def get_audio_transcription_words():
 
 
 def get_book_transcription_words():
-	with open('/data/book-transcription.clean.json.txt') as f:
+	with open(BOOK_CLEAN_FILE_PATH) as f:
 		lines = f.readlines()
 
 	all_words, sents_words = [], []
@@ -48,7 +49,7 @@ def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 	Scans book and audio words for a consecutive two words match.
 	'''
 	print('> next word match')
-	for b in range(max_next_word):
+	for b in range(MAX_NEXT_WORD):
 		future_idx_b = idx_b + b
 
 		if future_idx_b > book_sent_end_idx:
@@ -59,7 +60,7 @@ def next_word_match(book_sent_end_idx, words_a, idx_a, words_b, idx_b):
 
 		print('\nb -current:', idx_b, '-future:', future_idx_b, '-words:', future_b_1, future_b_2)
 
-		for a in range(max_next_word):
+		for a in range(MAX_NEXT_WORD):
 			future_idx_a = idx_a + a
 
 			if len(words_a) == future_idx_a + 1:
@@ -106,8 +107,7 @@ def skip_sentence(book_next_sent_words, words_a, idx_a, words_b, idx_b):
 
 
 if __name__ == '__main__':
-	max_next_word = 10
-	output_file = open('/data/audio-sentences.json.txt', 'w')
+	output_file = open(AUDIO_SENTENCES_FILE_PATH, 'w')
 
 	audio_words, audio_objs = get_audio_transcription_words()
 	assert len(audio_words) == len(audio_objs)

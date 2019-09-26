@@ -1,14 +1,15 @@
 import json
 import spacy
 
+from config import *
 from utils import clean_token
 
 
 if __name__ == '__main__':
-	with open('/data/book-transcription.txt', 'r') as f:
+	with open(BOOK_TRANSCRIPTION_FILE_PATH, 'r') as f:
 		text = f.read()
 
-	nlp = spacy.load('en_core_web_lg')
+	nlp = spacy.load(SPACY_MODEL)
 	# For large texts, such as books, we need to increase the default value.
 	nlp.max_length = 2000 * 1000 # magic number
 	doc = nlp(text)
@@ -27,7 +28,7 @@ if __name__ == '__main__':
 
 	print('sentences:', len(sents))
 
-	output_file = open('/data/book-transcription.clean.json.txt', 'w')
+	output_file = open(BOOK_CLEAN_FILE_PATH, 'w')
 
 	# Clean tokens: remove noisy tokens, normalize text.
 	for sent in sents:
