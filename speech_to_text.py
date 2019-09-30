@@ -23,6 +23,7 @@ def speech_to_text(file_name, output_transcription):
     # Converts speech to text
     print('Waiting for operation to complete...')
     operation = client.long_running_recognize(config, audio)
+    print('Operation name:', name)
     response = operation.result()
     # "response" is a plain protobuf object, which can be serialized to string using.
     # Note that "MessageToJson" actually returns a JSON object serialized as a string.
