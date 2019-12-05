@@ -72,3 +72,19 @@ python3 add_silence.py
 11. Normalize audio
 
 python3 normalize_audio.py
+
+
+
+tacotron 2
+
+I thought I matched the LJ set but after 90,000 iterations it is gibberish just like it was at 1000 iterations. (The LJ set could speak fairly well at 90,000).
+
+When training other datasets and assuming you have at least say 14 hours:
+
+- make sure the audio matches the transcription – you'd be surprised...
+- make sure you trim silences from both the beginning and end.
+- make sure the symbols match the transcription
+-- if no transitionsn, it will break step
+
+To make sure that the symbols used in the language are the same symbols in the list of symbols. If you're using english, the current symbol list should be fine.
+
